@@ -1,0 +1,280 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>suhxxn Plugins</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout: left-aligned editorial grid. A narrow label column on the left, content on the right; the hero pairs the pitch with a real alert log. */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --fg: #12161c;
+  --muted: #566070;
+  --line: #dfe3ea;
+  --accent: #0b6b63;
+  --accent-ink: #ffffff;
+  --accent-soft: #dff1ee;
+  --log-bg: #11161d;
+  --log-fg: #d5dbe5;
+  --log-dim: #8794a8;
+  --log-hit: #ffb86b;
+  --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1116;
+    --surface: #141a22;
+    --fg: #e8ecf2;
+    --muted: #9aa5b6;
+    --line: #232c38;
+    --accent: #4fd1c0;
+    --accent-ink: #07211e;
+    --accent-soft: #12302d;
+    --log-bg: #090c10;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1116;
+  --surface: #141a22;
+  --fg: #e8ecf2;
+  --muted: #9aa5b6;
+  --line: #232c38;
+  --accent: #4fd1c0;
+  --accent-ink: #07211e;
+  --accent-soft: #12302d;
+  --log-bg: #090c10;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+a { color: inherit; }
+.wrap { max-width: 1080px; margin: 0 auto; }
+
+/* top bar */
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; text-decoration: none; }
+.brand span { color: var(--accent); }
+.nav { display: flex; gap: 22px; flex-wrap: wrap; }
+.nav a { font-size: 14px; color: var(--muted); text-decoration: none; }
+.nav a:hover { color: var(--fg); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 48px; align-items: center; padding-block: 56px 72px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin: 0 0 18px; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 5.2vw, 56px); line-height: 1.04; letter-spacing: -0.025em; margin: 0 0 20px; text-wrap: balance; }
+.lede { font-size: 18px; color: var(--muted); max-width: 52ch; margin: 0 0 28px; }
+.actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; font: 500 15px var(--font-body); padding: 12px 20px; border-radius: 8px; text-decoration: none; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn:hover { filter: brightness(1.06); }
+
+.log { background: var(--log-bg); color: var(--log-fg); border-radius: 12px; border: 1px solid var(--line); overflow: hidden; min-width: 0; }
+.log-head { display: flex; justify-content: space-between; gap: 12px; padding: 10px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); font: 12px var(--font-mono); color: var(--log-dim); }
+.log-body { padding: 16px; font: 12.5px/1.65 var(--font-mono); overflow-x: auto; }
+.log-line { white-space: nowrap; }
+.log-line .t { color: var(--log-dim); }
+.log-line .c { color: var(--log-hit); }
+.log-note { padding: 0 16px 14px; font: 12px var(--font-body); color: var(--log-dim); }
+
+/* sections */
+section { border-top: 1px solid var(--line); padding-block: 56px; display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 32px; }
+section > h2 { font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 4px 0 0; }
+.content { min-width: 0; }
+h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; line-height: 1.2; letter-spacing: -0.01em; margin: 0 0 10px; }
+p { margin: 0 0 14px; }
+.muted { color: var(--muted); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 18px; font: 12.5px var(--font-mono); color: var(--muted); margin: 0 0 22px; padding: 0; list-style: none; }
+
+.groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 24px 0; }
+.group { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+.group h4 { font-family: var(--font-display); font-size: 15px; font-weight: 600; margin: 0 0 10px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.chips li { font: 12.5px var(--font-mono); padding: 3px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.limits { border-left: 3px solid var(--line); padding: 2px 0 2px 18px; margin-top: 24px; }
+.limits h4 { font-family: var(--font-display); font-size: 15px; margin: 0 0 6px; }
+.limits ul { margin: 0; padding-left: 18px; color: var(--muted); }
+
+.rows { display: grid; gap: 0; border-top: 1px solid var(--line); }
+.row { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.row dt { font-family: var(--font-display); font-weight: 600; }
+.row dd { margin: 0; color: var(--muted); }
+
+.stack { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.stack li { font: 13px var(--font-mono); padding: 6px 12px; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; }
+
+.contact-box { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 14px; }
+.contact-line { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.contact-line .k { font: 12px var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); min-width: 80px; }
+.contact-line .v { font: 500 16px var(--font-mono); user-select: all; overflow-wrap: anywhere; }
+.copy { font: 500 13px var(--font-body); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer; }
+.foot { padding-block: 32px 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 36px; padding-block: 32px 48px; }
+  section { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-block: 40px; }
+  .groups { grid-template-columns: minmax(0, 1fr); }
+  .row { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <a class="brand" href="#top">suhxxn<span>.</span>plugins</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#approach">How I work</a>
+      <a href="#stack">Tools</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Minecraft plugin developer</p>
+        <h1>Custom Paper plugins, tested on a live server.</h1>
+        <p class="lede">I build plugins for Minecraft servers, from commands and menus to packet-level tools. I run my own survival server, WaffleSMP, and test every plugin there before it ships.</p>
+        <div class="actions">
+          <a class="btn primary" href="#contact">Start a project</a>
+          <a class="btn" href="#work">See my work</a>
+        </div>
+      </div>
+      <figure class="log" style="margin:0" aria-label="Real alerts from my anti-cheat">
+        <div class="log-head"><span>latest.log</span><span>Absolute Reality v0.12</span></div>
+        <div class="log-body" tabindex="0">
+          <div class="log-line"><span class="t">[19:10:12]</span> AC &raquo; <span class="c">suhxxn</span> failed <b>AntiHunger</b> [1]</div>
+          <div class="log-line"><span class="t">[19:11:15]</span> AC &raquo; <span class="c">suhxxn</span> failed <b>FastLadder</b> [1]</div>
+          <div class="log-line"><span class="t"></span>&nbsp;&nbsp;rising at a constant 0.29 blocks/tick</div>
+          <div class="log-line"><span class="t">[19:12:17]</span> AC &raquo; <span class="c">suhxxn</span> failed <b>Blink</b> [1]</div>
+          <div class="log-line"><span class="t"></span>&nbsp;&nbsp;5 movement packets, no game tick between</div>
+          <div class="log-line"><span class="t">[19:09:43]</span> AC &raquo; <span class="c">suhxxn</span> failed <b>Phase</b> [1]</div>
+          <div class="log-line"><span class="t"></span>&nbsp;&nbsp;moved 22.4 blocks through solid blocks</div>
+        </div>
+        <div class="log-note">Alerts from my own test runs, with a hacked client on my own test server.</div>
+      </figure>
+    </div>
+
+    <section id="work">
+      <h2>Selected work</h2>
+      <div class="content">
+        <h3>Absolute Reality</h3>
+        <p class="muted">An alert-only anti-cheat for Paper servers, written in Java on PacketEvents. It reads what a client sends and says when the movement, aiming or clicking could not come from a real player.</p>
+        <ul class="meta">
+          <li>Java</li><li>Paper 26.x</li><li>PacketEvents</li><li>In development, v0.12</li>
+        </ul>
+        <p>I test it against a hacked client on my own server, then fix what it misses or gets wrong. The detection rules are plain Java with unit tests, so each one can be checked without starting a server.</p>
+
+        <div class="groups">
+          <div class="group">
+            <h4>Movement</h4>
+            <ul class="chips"><li>Speed</li><li>Fly</li><li>Glide</li><li>Jetpack</li><li>HighJump</li><li>Step</li><li>Jesus</li><li>Spider</li><li>FastLadder</li><li>NoSlowdown</li><li>Phase</li></ul>
+          </div>
+          <div class="group">
+            <h4>Combat</h4>
+            <ul class="chips"><li>KillAura</li><li>Reach</li><li>Hitbox</li><li>AutoClicker</li><li>Criticals</li><li>MaceDMG</li><li>AntiKnockback</li><li>WallHit</li></ul>
+          </div>
+          <div class="group">
+            <h4>World</h4>
+            <ul class="chips"><li>Nuker</li><li>FastPlace</li><li>Scaffold</li><li>InvWalk</li></ul>
+          </div>
+          <div class="group">
+            <h4>Packets and timing</h4>
+            <ul class="chips"><li>Timer</li><li>Blink</li><li>NoFall</li><li>AntiHunger</li><li>Rubberband</li><li>PacketFlood</li></ul>
+          </div>
+        </div>
+
+        <div class="limits">
+          <h4>What it does not catch yet</h4>
+          <ul>
+            <li>Subtle aim assist and trigger bots.</li>
+            <li>Nuker in survival mode, which looks like a very fast honest digger.</li>
+            <li>Vehicle and Elytra hacks.</li>
+            <li>Anything that only changes what the cheater sees, such as ESP or Xray. That needs server-side world hiding, not detection.</li>
+          </ul>
+          <p class="muted" style="margin:10px 0 0">It only sends alerts. It never kicks or bans, because I have not yet run it long enough on real players to trust it with punishments.</p>
+        </div>
+
+        <div class="rows" style="margin-top:40px">
+          <dl class="row" style="margin:0">
+            <dt>WaffleSMP</dt>
+            <dd>The survival server I run and use as a test bed: Paper, Geyser and Floodgate for Bedrock players, LuckPerms, Essentials, voice chat, and custom Skript.</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach">
+      <h2>How I work</h2>
+      <div class="content">
+        <dl class="rows" style="margin:0">
+          <div class="row"><dt>Scope in writing</dt><dd>Before any work starts, we agree what the plugin does, what it does not do, and which Minecraft version it targets.</dd></div>
+          <div class="row"><dt>Tested on a server</dt><dd>I run it on a live Paper server and send you the logs, not just a build that compiles.</dd></div>
+          <div class="row"><dt>Plain about limits</dt><dd>If something cannot be done reliably, I say so before you pay for it.</dd></div>
+          <div class="row"><dt>Source included</dt><dd>You get the source and build files. Ownership and reuse are agreed up front.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="stack">
+      <h2>Tools</h2>
+      <div class="content">
+        <ul class="stack">
+          <li>Java</li><li>Paper API</li><li>PacketEvents</li><li>Maven</li><li>Skript</li><li>LuckPerms</li><li>Vault</li><li>Geyser and Floodgate</li><li>Discord webhooks</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="content">
+        <h3>Tell me what your server needs.</h3>
+        <p class="muted">Send a short description: what the plugin should do, your server version, and when you need it. I reply with questions and a quote.</p>
+        <div class="contact-box">
+          <div class="contact-line">
+            <span class="k">Discord</span>
+            <span class="v" id="discord-value">add-your-discord-name</span>
+            <button class="copy" id="copy-discord" type="button">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>suhxxn plugins</span>
+    <span>Minecraft is a trademark of Mojang. This site is not affiliated with Mojang or Microsoft.</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById("copy-discord");
+  var val = document.getElementById("discord-value");
+  if (!btn || !val) return;
+  btn.addEventListener("click", function () {
+    var text = val.textContent;
+    function selectIt() {
+      try { var r = document.createRange(); r.selectNodeContents(val); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) {}
+    }
+    try {
+      navigator.clipboard.writeText(text).then(function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1600); }, function () { selectIt(); btn.textContent = "Selected"; });
+    } catch (e) { selectIt(); btn.textContent = "Selected"; }
+  });
+})();
+</script>
+
+</body></html>
