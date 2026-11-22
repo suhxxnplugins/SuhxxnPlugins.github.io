@@ -1,9 +1,9 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src https://script.google.com https://script.googleusercontent.com; form-action 'none'; base-uri 'none'; object-src 'none'; frame-src 'none'"><meta name="referrer" content="no-referrer"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>suhxxn Plugins</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
 <style>
-/* Layout: one shell, five views switched by the URL hash. Left-aligned editorial pages; a real alert log is the signature element. */
+/* Layout: one shell, several views switched by the URL hash. Left-aligned editorial pages. */
 :root {
   --bg: #f5f6f8;
   --surface: #ffffff;
@@ -37,6 +37,7 @@
 }
 
 * { box-sizing: border-box; }
+html, body { overflow-x: clip; }
 body {
   background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 16px; line-height: 1.6;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0;
@@ -81,9 +82,6 @@ p { margin: 0 0 14px; }
 .btn.primary:hover { filter: brightness(1.08); }
 .band { border-top: 1px solid var(--line); padding-block: 56px; }
 .head { padding-block: 40px 40px; }
-.crumbs { font: 12.5px var(--font-mono); color: var(--muted); margin: 0 0 18px; }
-.crumbs a { text-decoration: none; color: var(--accent); }
-.crumbs a:hover { text-decoration: underline; }
 
 /* hero */
 .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 48px; align-items: center; padding-block: 48px 72px; }
@@ -92,26 +90,7 @@ p { margin: 0 0 14px; }
   background-size: 140% 140%, 140% 140%; animation: drift 14s ease-in-out infinite alternate; }
 .word { display: inline-block; animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; animation-delay: calc(var(--w) * 70ms + 100ms); }
 
-/* log panels */
-.log { background: var(--log-bg); color: var(--log-fg); border-radius: 12px; border: 1px solid var(--line); overflow: hidden; min-width: 0; margin: 0; }
-.log-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); font: 12px var(--font-mono); color: var(--log-dim); }
-.dots { display: inline-flex; gap: 6px; }
-.dots i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255, 255, 255, 0.16); display: block; }
-.log-body { padding: 14px 16px; font: 12.5px/1.7 var(--font-mono); overflow-x: auto; min-height: 168px; }
-.log-line { white-space: nowrap; animation: lineIn 0.35s ease both; }
-.log-line .t { color: var(--log-dim); }
-.log-line .c { color: var(--log-hit); }
-.log-line .n { color: #fff; font-weight: 500; }
-.log-line .ms { color: var(--log-dim); }
-.log-note { padding: 0 16px 14px; font: 12px var(--font-body); color: var(--log-dim); }
-.caret { display: inline-block; width: 7px; height: 14px; background: var(--log-dim); vertical-align: -2px; margin-left: 4px; animation: blink 1.1s steps(1) infinite; }
 
-/* stats */
-.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.stat { padding: 26px 24px 26px 0; }
-.stat + .stat { padding-left: 24px; border-left: 1px solid var(--line); }
-.stat b { display: block; font: 600 38px/1.1 var(--font-display); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.stat span { color: var(--muted); font-size: 14px; }
 
 /* cards */
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
@@ -129,27 +108,8 @@ dl.facts dt { font-family: var(--font-display); font-weight: 600; }
 dl.facts dd { margin: 0; color: var(--muted); }
 .stack { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .stack li { font: 13px var(--font-mono); padding: 6px 12px; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; }
-
-/* detection explorer */
-.explorer { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; align-items: start; }
-.explorer .log { position: sticky; top: 16px; }
-.legend { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 13px; color: var(--muted); margin: 0 0 20px; }
-.legend i { display: inline-block; width: 22px; height: 12px; border-radius: 999px; vertical-align: -1px; margin-right: 6px; }
 .legend .a { background: var(--accent-soft); border: 1px solid var(--accent); }
 .legend .b { border: 1px dashed var(--muted); }
-.grp { margin-bottom: 22px; }
-.grp h4 { font: 600 12px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
-.chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 0; padding: 0; list-style: none; }
-.chip { font: 13px var(--font-mono); padding: 5px 11px; border-radius: 999px; cursor: pointer; background: var(--accent-soft); color: var(--accent); border: 1px solid transparent; transition: transform 0.15s, border-color 0.15s; }
-.chip:hover { transform: translateY(-2px); border-color: var(--accent); }
-.chip.untested { background: transparent; color: var(--muted); border: 1px dashed var(--muted); }
-.chip[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.chip.untested[aria-pressed="true"] { background: var(--muted); color: var(--bg); border-style: solid; border-color: var(--muted); }
-.detail { padding: 16px; font: 13px/1.7 var(--font-mono); min-height: 190px; }
-.detail .name { font: 600 16px var(--font-display); color: #fff; margin-bottom: 4px; display: block; }
-.detail .what { font: 14px/1.55 var(--font-body); color: var(--log-fg); margin: 0 0 14px; display: block; }
-.detail .state { font: 12px var(--font-mono); color: var(--log-dim); margin-top: 10px; display: block; }
-.detail .raw { white-space: normal; overflow-wrap: anywhere; }
 
 /* steps and timeline */
 .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
@@ -161,9 +121,6 @@ dl.facts dd { margin: 0; color: var(--muted); }
 .timeline li:first-child::before { background: var(--accent); }
 .timeline b { font-family: var(--font-display); }
 .timeline .v { font: 12px var(--font-mono); color: var(--accent); margin-right: 8px; }
-.limits { border-left: 3px solid var(--line); padding: 2px 0 2px 18px; }
-.limits ul { margin: 0; padding-left: 18px; color: var(--muted); }
-.limits li { margin-bottom: 6px; }
 
 /* services */
 details { border-bottom: 1px solid var(--line); padding-block: 16px; }
@@ -196,6 +153,26 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .saved .row span { font: 13px var(--font-mono); color: var(--muted); }
 .mini { font: 500 13px var(--font-body); padding: 5px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer; }
 
+.price { font: 600 22px var(--font-display); letter-spacing: -0.01em; margin: 4px 0 10px; color: var(--fg); }
+.callout { border: 1px solid var(--line); border-left: 3px solid var(--accent); background: var(--surface); border-radius: 8px; padding: 14px 16px; margin: 0 0 28px; color: var(--muted); max-width: 70ch; }
+.callout b { color: var(--fg); }
+.empty { border: 1px dashed var(--muted); border-radius: 12px; padding: 18px; color: var(--muted); }
+.contact { font-size: 15px; }
+.contact div { display: grid; grid-template-columns: 70px minmax(0, 1fr); gap: 8px; padding-block: 4px; overflow-wrap: anywhere; }
+.contact b { font-family: var(--font-display); font-weight: 600; }
+.contact a { color: var(--accent); }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.fine { font-size: 13px; color: var(--muted); margin: 14px 0 0; }
+.prose { max-width: 72ch; }
+.prose h2 { font-size: 22px; margin: 38px 0 10px; }
+.prose h2:first-child { margin-top: 0; }
+.prose p, .prose li { color: var(--muted); }
+.prose ul { margin: 0 0 14px; padding-left: 20px; }
+.prose li { margin-bottom: 6px; }
+.prose b, .prose strong { color: var(--fg); }
+.updated { font: 12.5px var(--font-mono); color: var(--muted); margin: 0 0 18px; }
+.agree { padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.agree a { color: var(--accent); }
 .cta-band { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 36px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
 .cta-band h2 { margin: 0 0 6px; }
 .cta-band p { margin: 0; color: var(--muted); }
@@ -206,12 +183,8 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 
 @media (max-width: 860px) {
   .hero { grid-template-columns: minmax(0, 1fr); gap: 36px; padding-block: 28px 48px; }
-  .split, .explorer { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-  .explorer .log { position: static; }
+  .split { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .cards, .cards.two, .steps { grid-template-columns: minmax(0, 1fr); }
-  .stats { grid-template-columns: minmax(0, 1fr); }
-  .stat, .stat + .stat { padding: 18px 0; border-left: 0; }
-  .stat + .stat { border-top: 1px solid var(--line); }
   .formgrid { grid-template-columns: minmax(0, 1fr); }
   dl.facts div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
   .band { padding-block: 40px; }
@@ -228,7 +201,6 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
     <nav class="nav" aria-label="Pages" id="nav">
       <a href="#home" data-view="home">Home</a>
       <a href="#waffle" data-view="waffle">WaffleSMP</a>
-      <a href="#anticheat" data-view="anticheat">Anti-cheat</a>
       <a href="#services" data-view="services">Services</a>
       <a href="#request" data-view="request" class="cta">Request a plugin</a>
     </nav>
@@ -241,31 +213,21 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
         <div>
           <p class="eyebrow rise" style="--i:0">Minecraft plugin developer</p>
           <h1 aria-label="Custom Paper plugins, tested on a live server."><span class="word" style="--w:0">Custom</span> <span class="word" style="--w:1">Paper</span> <span class="word" style="--w:2">plugins,</span> <span class="word" style="--w:3">tested</span> <span class="word" style="--w:4">on</span> <span class="word" style="--w:5">a</span> <span class="word" style="--w:6">live</span> <span class="word" style="--w:7">server.</span></h1>
-          <p class="lede rise" style="--i:6">I build the plugins behind WaffleSMP, a survival server I run myself, and I build plugins for other servers too. Everything is tried there first.</p>
+          <p class="lede rise" style="--i:6">Custom plugins for server owners and networks that need them to work: scope agreed in writing, tested on a live server, handed over with the source. I run WaffleSMP myself, and every plugin is tried there first.</p>
           <div class="actions rise" style="--i:7">
             <a class="btn primary" href="#request">Request a plugin</a>
             <a class="btn" href="#waffle">See WaffleSMP</a>
           </div>
         </div>
-        <figure class="log rise" style="--i:4" aria-label="Alerts from the WaffleSMP anti-cheat, from my own test runs">
-          <div class="log-head"><span class="dots"><i></i><i></i><i></i></span><span>latest.log</span><span>Absolute Reality</span></div>
-          <div class="log-body" id="hero-log" tabindex="0"></div>
-          <div class="log-note">Real alerts from my own test runs, with a hacked client on my own server.</div>
-        </figure>
-      </div>
-
-      <div class="stats rise" style="--i:8">
-        <div class="stat"><b id="stat-total">0</b><span>kinds of cheating Absolute Reality looks for</span></div>
-        <div class="stat"><b id="stat-tested">0</b><span>already caught in my own test runs</span></div>
-        <div class="stat"><b>0</b><span>punishments. It only alerts, until real play proves it right.</span></div>
+        <a class="card rise" style="--i:4;align-self:start" href="#waffle"><span class="tag">Home server</span><h3>WaffleSMP.in</h3><p>A survival server on Paper with Bedrock support, voice chat and custom scripts. Every plugin I write runs here first.</p><span class="more">See the server</span></a>
       </div>
 
       <section class="band">
         <h2>Built where I play.</h2>
-        <p class="muted" style="max-width:60ch">WaffleSMP is where my plugins get their first real test. Absolute Reality, the anti-cheat, is one part of it.</p>
+        <p class="muted" style="max-width:60ch">WaffleSMP is where my plugins get their first real test.</p>
         <div class="cards two">
           <a class="card" href="#waffle"><span class="tag">Server</span><h3>WaffleSMP</h3><p>A survival server on Paper with Bedrock support, voice chat and custom scripts.</p><span class="more">See the server</span></a>
-          <a class="card" href="#anticheat"><span class="tag">Part of WaffleSMP</span><h3>Absolute Reality</h3><p>The server's anti-cheat. It reads what each client sends and alerts staff when it cannot be a real player.</p><span class="more">Open the detection explorer</span></a>
+          <div class="card"><span class="tag">How it is used</span><h3>Test first, then ship</h3><p>New plugins run on this server before they go to anyone else.</p></div>
         </div>
       </section>
 
@@ -274,13 +236,14 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
         <div class="cards">
           <a class="card" href="#services"><h3>Gameplay plugins</h3><p>Commands, menus, kits, warps, custom items and events.</p></a>
           <a class="card" href="#services"><h3>Economy and shops</h3><p>Currencies, shop menus, rewards and hooks into Vault.</p></a>
-          <a class="card" href="#services"><h3>Security tools</h3><p>Anti-cheat style checks, logging and staff alerts.</p></a>
+          <a class="card" href="#services"><h3>Integrations</h3><p>Discord webhooks, account linking and permission hooks with LuckPerms.</p></a>
         </div>
+        <p class="muted" style="margin:22px 0 0;max-width:68ch"><b style="color:var(--fg)">Who I work with:</b> server owners and networks, aged 18 or over, with a budget for the work. Minimum project size: <b data-price="minimum" style="color:var(--fg)">agreed in the quote</b>. <a href="#services" style="color:var(--accent)">See pricing and terms</a>.</p>
       </section>
 
       <section class="band">
         <div class="cta-band">
-          <div><h2>Have a plugin in mind?</h2><p>Fill in a short request and get a request ID to send me.</p></div>
+          <div><h2>Have a plugin in mind?</h2><p>Fill in a short request and I will reply with questions and a quote.</p></div>
           <a class="btn primary" href="#request">Request a plugin</a>
         </div>
       </section>
@@ -307,72 +270,14 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
         <div>
           <h2>The plugin stack</h2>
           <ul class="stack">
-            <li>Skript</li><li>PacketEvents</li><li>Essentials</li><li>Geyser</li><li>Floodgate</li><li>ViaVersion</li><li>LuckPerms</li><li>Vault</li><li>Simple Voice Chat</li><li>Absolute Reality</li>
+            <li>Skript</li><li>PacketEvents</li><li>Essentials</li><li>Geyser</li><li>Floodgate</li><li>ViaVersion</li><li>LuckPerms</li><li>Vault</li><li>Simple Voice Chat</li>
           </ul>
-          <p class="muted" style="margin-top:16px">Absolute Reality is the one I wrote myself for this server.</p>
         </div>
       </section>
       <section class="band">
-        <h2>Parts of WaffleSMP</h2>
+        <h2>How the server is used</h2>
         <div class="cards two">
-          <a class="card" href="#anticheat"><span class="tag">In development</span><h3>Absolute Reality</h3><p>WaffleSMP's anti-cheat. Alert-only for now. It is built for this server and runs only here.</p><span class="more">Open the detection explorer</span></a>
-          <div class="card"><span class="tag">How it is used</span><h3>Test first, then ship</h3><p>New checks are tried against a real hacked client on this server, and honest play is used to find false alarms.</p></div>
-        </div>
-      </section>
-    </div>
-
-    <!-- ANTI-CHEAT -->
-    <div class="view" id="v-anticheat" hidden>
-      <div class="head">
-        <p class="crumbs rise" style="--i:0"><a href="#waffle">WaffleSMP</a> / Absolute Reality</p>
-        <h1 class="rise" style="--i:1">Absolute Reality</h1>
-        <p class="lede rise" style="--i:2">The anti-cheat for WaffleSMP. It watches what each player's client sends and raises an alert when a move, aim or click cannot be real. It is a part of the server, not a separate product.</p>
-        <ul class="stack rise" style="--i:3"><li>Alert-only</li><li>Java on Paper</li><li>PacketEvents</li><li id="ver">in development</li></ul>
-      </div>
-
-      <section class="band">
-        <h2>Detection explorer</h2>
-        <p class="muted" style="max-width:62ch">Pick a check. Where I have one, you see the real alert it raised in my test log.</p>
-        <div class="legend"><span><i class="a"></i>Caught in a test run</span><span><i class="b"></i>Written and unit-tested, not tried live yet</span></div>
-        <div class="explorer">
-          <div id="groups"></div>
-          <figure class="log">
-            <div class="log-head"><span class="dots"><i></i><i></i><i></i></span><span>latest.log</span><span>selected check</span></div>
-            <div class="detail" id="detail" aria-live="polite"></div>
-          </figure>
-        </div>
-      </section>
-
-      <section class="band">
-        <h2>How it decides</h2>
-        <div class="steps">
-          <div class="card"><h3>1. Read</h3><p>It listens to the packets each client sends: movement, clicks, digging, placing and aim.</p></div>
-          <div class="card"><h3>2. Judge</h3><p>Each check compares those packets with what the game allows, and with the world that player can see.</p></div>
-          <div class="card"><h3>3. Alert</h3><p>If the evidence is strong, staff get one alert with the reason. Nobody is kicked or banned.</p></div>
-        </div>
-      </section>
-
-      <section class="band">
-        <h2>How it grew</h2>
-        <ol class="timeline">
-          <li><span class="v">v0.10</span><b>Packet-level core</b><br><span class="muted">NoFall, Blink, Nuker, FastPlace, InvWalk, NoSlowdown.</span></li>
-          <li><span class="v">v0.11</span><b>More hacked-client moves</b><br><span class="muted">Criticals, MaceDMG, AntiHunger, FastLadder, Phase.</span></li>
-          <li><span class="v">v0.12</span><b>Line of sight and floods</b><br><span class="muted">WallHit, packet and inventory flood checks, bot-rhythm clicks.</span></li>
-          <li><span class="v">v0.13</span><b>Aim and actions</b><br><span class="muted">Steady-aim detection, sneak and sprint packet spam.</span></li>
-          <li><span class="v">v0.14</span><b>Server-side timing</b><br><span class="muted">FastBreak, NoWeb, Spinbot, Sneak, Elytra and vehicle checks.</span></li>
-          <li><span class="v">v0.15</span><b>Water, sprint and ore</b><br><span class="muted">LiquidSpeed, InvalidSprint and a first Xray statistic.</span></li>
-        </ol>
-      </section>
-
-      <section class="band">
-        <div class="limits">
-          <h2 style="font-size:22px">What it does not catch yet</h2>
-          <ul>
-            <li>Subtle aim assist and trigger bots. A first version missed Wurst's AimAssist.</li>
-            <li>Nuker in survival mode, which looks like a very fast honest digger.</li>
-            <li>Anything that only changes what the cheater sees, such as ESP or Xray textures. WaffleSMP uses Paper's anti-xray for that.</li>
-          </ul>
-          <p class="muted" style="margin:12px 0 0">It does not punish anyone. I want weeks of real play without false alarms first.</p>
+          <div class="card"><span class="tag">Test bed</span><h3>Test first, then ship</h3><p>New plugins run on this server before anyone else gets them, so problems show up here first.</p></div>
         </div>
       </section>
     </div>
@@ -382,17 +287,42 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
       <div class="head">
         <p class="eyebrow rise" style="--i:0">Services</p>
         <h1 class="rise" style="--i:1">What I build.</h1>
-        <p class="lede rise" style="--i:2">Custom Paper plugins for survival, minigame and community servers. Quote on request, scope agreed in writing.</p>
+        <p class="lede rise" style="--i:2">Custom Paper plugins for server owners and networks that need them to work. A fixed quote and a written scope before any work starts.</p>
       </div>
+      <section class="band">
+        <h2>Who I work with</h2>
+        <p class="muted" style="max-width:64ch">Server owners, staff teams and networks, aged 18 or over, who have a budget for the work and want it done properly: a written scope, testing on a live server, and the source handed over. I work on a few projects at a time so each one gets real attention.</p>
+        <p class="muted" style="max-width:64ch">Minimum project size: <b data-price="minimum" style="color:var(--fg)">agreed in the quote</b>. For very small jobs, a free plugin that already exists is often the better choice, and I will say so if I know one.</p>
+      </section>
       <section class="band">
         <div class="cards">
           <div class="card"><h3>Gameplay</h3><p>Custom commands, GUI menus, kits, warps, homes, custom items, events and rewards.</p></div>
           <div class="card"><h3>Economy and shops</h3><p>Currencies, shop menus, sell commands and hooks into Vault and Essentials.</p></div>
-          <div class="card"><h3>Security</h3><p>Anti-cheat style checks, exploit guards, logging and alerts for staff.</p></div>
           <div class="card"><h3>Integrations</h3><p>Discord webhooks and account linking, permission hooks with LuckPerms.</p></div>
           <div class="card"><h3>Skript to Java</h3><p>Move slow or fragile Skript features into a proper plugin.</p></div>
           <div class="card"><h3>Something else</h3><p>If it runs on Paper and can be tested, describe it and I will tell you honestly if I can do it.</p></div>
         </div>
+      </section>
+      <section class="band">
+        <h2>Pricing</h2>
+        <p class="muted" style="max-width:64ch">"Starting from" prices by kind of work. Every project gets a fixed quote for its agreed scope. The starting price is the lowest I take for that kind of work, not the typical price.</p>
+        <div class="cards">
+          <div class="card"><span class="tag">Simple</span><h3>Gameplay plugins</h3><div class="price" data-price="simple">Quoted by scope</div><p>Commands, menus, kits, warps, custom items and events. A clear feature set without a custom data model.</p></div>
+          <div class="card"><span class="tag">Medium</span><h3>Economy and shops</h3><div class="price" data-price="economy">Quoted by scope</div><p>Currencies, shop menus, rewards, Vault and Essentials hooks, and saved player data.</p></div>
+          <div class="card"><span class="tag">Complex</span><h3>Large systems and server revamps</h3><div class="price" data-price="complex">Quoted by scope</div><p>Large systems and full server revamps. Scoped in stages, with testing time included.</p></div>
+        </div>
+      </section>
+      <section class="band">
+        <h2>How I work</h2>
+        <dl class="facts">
+          <div><dt>Deposit</dt><dd>50% up front before work starts. The rest is paid on delivery, before the final jar and source are released.</dd></div>
+          <div><dt>Revisions</dt><dd>Two rounds of changes inside the agreed scope are included. Anything beyond the written scope is quoted separately.</dd></div>
+          <div><dt>Code ownership</dt><dd>You own the finished plugin and its source once it is paid in full. I may reuse generic parts that are not specific to you, such as helper code and common patterns. I never reuse your branding, settings, secrets or unique features.</dd></div>
+          <div><dt>Cancellation and refunds</dt><dd>Cancel before I start and you get the full deposit back. After work has started, the deposit covers the work done so far and I send you what exists. If I cannot deliver the agreed scope, you get the deposit back.</dd></div>
+          <div><dt>Delivery time</dt><dd>Agreed in the written scope. If it is going to slip, I tell you early, not on the day.</dd></div>
+          <div><dt>After handover</dt><dd>I fix bugs in the agreed scope for 14 days at no charge. Breakage from a new Minecraft or Paper version, and new features, are quoted separately.</dd></div>
+        </dl>
+        <p class="fine">These are the short version. Read the full <a href="#terms" style="color:var(--accent)">Terms and Conditions</a> and the <a href="#privacy" style="color:var(--accent)">Privacy Policy</a>. The written scope for each project is what applies.</p>
       </section>
       <section class="band">
         <h2>How a project goes</h2>
@@ -404,11 +334,29 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
         </ol>
       </section>
       <section class="band">
+        <h2>Proof of work</h2>
+        <div class="split">
+          <div>
+            <h3>Sample plugin with public source</h3>
+            <div class="card" id="sample-card" hidden>
+              <span class="tag">GitHub</span><h3>QuickWarps</h3>
+              <p>A small, complete Paper plugin: commands, permissions, tab completion and saved data. Short on purpose, so you can read all of it.</p>
+              <a class="more" id="sample-link" href="#services" target="_blank" rel="noopener noreferrer">Read the source on GitHub</a>
+            </div>
+            <div class="empty" id="sample-empty">The public sample plugin is coming. Its source will be on GitHub.</div>
+          </div>
+          <div>
+            <h3>Client reviews</h3>
+            <div class="empty">No client projects yet, so no reviews yet. They will be added here after my first projects, and only real ones.</div>
+          </div>
+        </div>
+      </section>
+      <section class="band">
         <h2>Questions</h2>
         <details><summary>Which Minecraft versions do you support?</summary><p>Paper, on the version you run. Tell me the exact version in the request. Plugins can break when Minecraft updates, so I note the supported version in the handover.</p></details>
-        <details><summary>Do I get the source code?</summary><p>Yes, source and build files are included. Who owns the code and whether I may reuse generic parts is agreed up front.</p></details>
+        <details><summary>Do I get the source code?</summary><p>Yes, source and build files are included. Ownership and my right to reuse generic parts are spelled out under How I work above.</p></details>
         <details><summary>What do you not build?</summary><p>Cheats, anything that harms other players or servers, and anything I cannot test reliably. I will say so before you pay for it.</p></details>
-        <details><summary>How much does it cost?</summary><p>It depends on the size of the plugin. Send a request and I will quote a fixed price for the agreed scope.</p></details>
+        <details><summary>How much does it cost?</summary><p>See Pricing above for the starting price by kind of work. Send a request and I will quote a fixed price for the agreed scope.</p></details>
         <details><summary>Do you use AI tools?</summary><p>Yes, as part of how I work. I test everything on a real server and I am the one who answers for the result.</p></details>
       </section>
       <section class="band">
@@ -416,6 +364,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
           <div><h2>Ready to start?</h2><p>A short request is enough. I will ask if I need more.</p></div>
           <a class="btn primary" href="#request">Request a plugin</a>
         </div>
+        <div class="contact" data-contact style="margin-top:20px"></div>
       </section>
     </div>
 
@@ -424,7 +373,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
       <div class="head">
         <p class="eyebrow rise" style="--i:0">Plugin request</p>
         <h1 class="rise" style="--i:1">Tell me what you need.</h1>
-        <p class="lede rise" style="--i:2">Fill in the form. You get a request ID and a ready-to-send message. Send it to me on Discord and I will reply with questions and a quote.</p>
+        <p class="lede rise m-manual" style="--i:2">Fill in the form. You get a request ID and a ready-to-send message. Send it to me on Discord and I will reply with questions and a quote.</p><p class="lede rise m-send" style="--i:2" hidden>Fill in the form and press send. It reaches me straight away, and I reply on Discord with questions and a quote.</p>
       </div>
       <section class="band split">
         <form id="req-form" novalidate>
@@ -435,7 +384,6 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
               <select id="f-type">
                 <option>Gameplay (commands, menus, items)</option>
                 <option>Economy and shops</option>
-                <option>Security or anti-cheat</option>
                 <option>Discord or web integration</option>
                 <option>Skript to Java rewrite</option>
                 <option>Something else</option>
@@ -460,21 +408,31 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
               </select></div>
             <div class="field"><label for="f-budget">Budget <small>(optional)</small></label><input type="text" id="f-budget" autocomplete="off" maxlength="40"></div>
             <div class="field full"><label class="check"><input type="checkbox" id="f-src" checked><span>I want the source code included.</span></label></div>
+            <div class="field full agree">
+              <label class="check"><input type="checkbox" id="f-agree"><span>I am 18 or over, and I have read and agree to the <a href="#terms" target="_blank" rel="noopener noreferrer">Terms and Conditions</a> and the <a href="#privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span></label>
+              <div class="err" id="e-agree"></div>
+            </div>
           </div>
-          <div class="actions" style="margin-top:22px"><button class="btn primary" type="submit">Create my request</button><button class="btn" type="reset" id="f-reset">Clear</button></div>
+          <div class="actions" style="margin-top:22px"><button class="btn primary" type="submit" id="f-submit">Create my request</button><button class="btn" type="reset" id="f-reset">Clear</button></div>
+          <p class="fine m-manual">Nothing you type here is sent anywhere by this page. Details are in the <a href="#privacy" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Privacy Policy</a>.</p>
+          <p class="fine m-send" hidden>Nothing is sent until you press the button. Then your request goes to me through a small relay and lands in a private channel on my Discord server. Details are in the <a href="#privacy" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Privacy Policy</a>.</p>
+          <div class="hp" aria-hidden="true"><label for="f-website">Leave this empty</label><input type="text" id="f-website" tabindex="-1" autocomplete="off"></div>
         </form>
 
         <div>
-          <div id="receipt" hidden></div>
+          <div id="receipt" class="receipt" hidden></div>
           <div id="howto">
             <h2>How it works</h2>
             <ol class="timeline">
               <li><b>Fill in the form</b><br><span class="muted">The more detail, the better the quote.</span></li>
-              <li><b>Get a request ID</b><br><span class="muted">Your request is turned into a short message with its own ID.</span></li>
-              <li><b>Send it to me</b><br><span class="muted">Copy it and send it to me on Discord: <span id="discord-value" style="font-family:var(--font-mono);color:var(--fg)">orchinplayz</span></span></li>
+              <li class="m-manual"><b>Get a request ID</b><br><span class="muted">Your request is turned into a short message with its own ID.</span></li>
+              <li class="m-send" hidden><b>Press send</b><br><span class="muted">Your request reaches me straight away, with its own request ID.</span></li>
+              <li class="m-manual"><b>Send it to me</b><br><span class="muted">Copy it and send it to me on Discord: <span id="discord-value" style="font-family:var(--font-mono);color:var(--fg)">orchinplayz</span><span id="email-alt"></span></span></li>
               <li><b>I reply</b><br><span class="muted">With questions, a quote and a date.</span></li>
             </ol>
-            <p id="form-link-wrap" class="muted" hidden>Prefer a form? <a id="form-link" href="#request" target="_blank" rel="noopener" style="color:var(--accent)">Open my request form</a>.</p>
+            <h3 style="margin-top:26px">Contact</h3>
+            <div class="contact" data-contact></div>
+            <p id="form-link-wrap" class="muted" hidden>Prefer a form? <a id="form-link" href="#request" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Open my request form</a>.</p>
           </div>
           <div class="saved" id="saved" hidden>
             <h3>Requests from this device</h3>
@@ -483,11 +441,140 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
         </div>
       </section>
     </div>
+
+    <!-- TERMS -->
+    <div class="view" id="v-terms" hidden>
+      <div class="head">
+        <p class="eyebrow rise" style="--i:0">Legal</p>
+        <h1 class="rise" style="--i:1">Terms and Conditions</h1>
+        <p class="lede rise" style="--i:2">How I work with clients, in plain words. Please read this before you send a request.</p>
+        <p class="updated rise" style="--i:3">Last updated: 22 November 2026</p>
+      </div>
+      <section class="band prose">
+        <h2>1. Who these terms are for</h2>
+        <p>These terms apply when you ask me ("I", "me", suhxxn plugins) to build a plugin or do other work. "You" is the person or server who asks. You must be 18 or over. By ticking the box on the request form, or by asking me to start work, you agree to these terms.</p>
+        <p>The request form is not a contract. Work starts only when the scope, price and date are agreed in writing. Messages on Discord or by email count as writing.</p>
+
+        <h2>2. Requests and quotes</h2>
+        <p>Asking for a quote is free. A quote is a fixed price for the scope agreed in writing. If the scope changes, I will give you a new quote before doing the extra work.</p>
+
+        <h2>3. Payment</h2>
+        <ul>
+          <li><b>Deposit:</b> 50% before I start. The deposit is what reserves my time for your project.</li>
+          <li><b>The rest:</b> paid on delivery, before I release the final jar and source code.</li>
+          <li>The payment method and any other details are written into the quote.</li>
+        </ul>
+
+        <h2>4. Scope and revisions</h2>
+        <p>The written scope says what the plugin does and does not do, your Minecraft version and the date. Two rounds of changes inside that scope are included. A change is something that fixes or adjusts what was agreed. New features, or a different idea of what the plugin should do, are quoted separately.</p>
+
+        <h2>5. Delivery time</h2>
+        <p>The delivery time is agreed in the written scope. It depends on you giving me the information and access I ask for in good time. If it is going to slip, I will tell you early.</p>
+
+        <h2>6. What I need from you</h2>
+        <ul>
+          <li>Correct information: your exact Minecraft and Paper version and the other plugins you run.</li>
+          <li>Answers to my questions, and feedback on the revisions, in a reasonable time.</li>
+          <li>A backup of your server before you install anything I deliver. You are responsible for installing and running it on your server.</li>
+          <li>No passwords, tokens or other secrets sent to me in messages. If I need access to something, we agree how together.</li>
+        </ul>
+
+        <h2>7. Ownership of the code</h2>
+        <ul>
+          <li>Once you have paid in full, you own the finished plugin and its source code.</li>
+          <li>I keep the right to reuse generic parts that are not specific to you, such as helper code and common patterns. I never reuse your branding, settings, secrets or unique features.</li>
+          <li>Unless we agree otherwise, I will not publish your server's name, your code or your private details. I will ask first if I want to show the work.</li>
+          <li>Plugins use other software, such as the Paper API. Those pieces keep their own licenses.</li>
+        </ul>
+
+        <h2>8. Help after handover</h2>
+        <p>For 14 days after handover I fix bugs in the agreed scope at no charge. This does not cover: breakage from a new Minecraft or Paper version, changes made by other plugins, problems with your server setup, or new features. I can quote those separately.</p>
+
+        <h2>9. Cancellation and refunds</h2>
+        <ul>
+          <li><b>Before I start:</b> you get the full deposit back.</li>
+          <li><b>After I have started:</b> the deposit covers the work done so far. I send you what exists.</li>
+          <li><b>If I cannot deliver the agreed scope:</b> you get the deposit back.</li>
+        </ul>
+
+        <h2>10. What I do not build</h2>
+        <p>I do not build cheats, backdoors or malware, anything that harms other players or servers, or anything I cannot test reliably. If I stop a project for one of these reasons, I refund the part of the deposit that covers work I did not do.</p>
+
+        <h2>11. How I work, and AI tools</h2>
+        <p>I use AI tools as part of how I work. I test what I deliver on a real server, and I am the one who answers for the result.</p>
+
+        <h2>12. No guarantees, and limits on my responsibility</h2>
+        <p>I test my work, but no software is free of bugs. I deliver what the written scope says. My responsibility for any claim about a project is limited to the amount you paid me for that project. I am not responsible for lost players, lost income or lost data. That is why you take a backup first.</p>
+
+        <h2>13. Changes to these terms</h2>
+        <p>I may update these terms. Each project follows the version that was current on the day its scope was agreed. The date at the top shows the latest update.</p>
+
+        <h2>14. Questions</h2>
+        <p>Ask me before you start, not after.</p>
+        <div class="contact" data-contact></div>
+        <p class="fine">These terms are written in plain language and are not legal advice. See also the <a href="#privacy" style="color:var(--accent)">Privacy Policy</a>.</p>
+      </section>
+    </div>
+
+    <!-- PRIVACY -->
+    <div class="view" id="v-privacy" hidden>
+      <div class="head">
+        <p class="eyebrow rise" style="--i:0">Legal</p>
+        <h1 class="rise" style="--i:1">Privacy Policy</h1>
+        <p class="lede rise" style="--i:2">What this website does with your information. Short answer: very little.</p>
+        <p class="updated rise" style="--i:3">Last updated: 22 November 2026</p>
+      </div>
+      <section class="band prose">
+        <div class="callout m-manual"><b>In short.</b> The request form runs in your browser and sends nothing to any server. I only receive your request if you send it to me yourself.</div><div class="callout m-send" hidden><b>In short.</b> Nothing is sent until you press the send button. Then your request goes to me, and only to me, through a small relay. This page has no analytics, cookies or trackers.</div>
+
+        <h2>1. The request form</h2>
+        <p class="m-manual">The form runs in your browser. This page does not send what you type to any server. When you tick the agreement box and press the button, the page turns your answers into a text message on your screen. Nothing has been sent until you copy that message and send it to me.</p>
+        <p class="m-send" hidden>Nothing you type is sent while you fill in the form. When you tick the agreement box and press send, the page sends your answers to a small relay that I run (a Google Apps Script web app). The relay posts them to a private channel on my Discord server. The page's security settings allow it to connect only to Google's script servers, where the relay runs, and nowhere else. If sending fails, the page tells you and shows a message you can copy and send to me yourself.</p>
+
+        <h2>2. What is saved on your device</h2>
+        <p>The last 20 requests you create are saved in this browser's own storage, on your device, so you can copy them again. They are not sent to me. The Remove button deletes one request, and clearing this site's data in your browser deletes them all. I cannot see them.</p>
+
+        <h2>3. Hosting, fonts, cookies and tracking</h2>
+        <ul>
+          <li>This website is hosted on GitHub Pages and loads its fonts from Google Fonts. Those two services can see ordinary visit details, such as your IP address and browser type, the same as for any web page. Their own privacy policies apply to that.</li>
+          <li>This page adds no analytics, no cookies and no trackers.</li>
+          <li class="m-send" hidden>When you press send, your request passes through Google's servers (the relay) on its way to Discord. The relay does not store your request. It only remembers the request ID for a few hours, so the same request is not posted twice. Google keeps its usual technical logs. Discord stores the message in my private channel, under its own policies.</li>
+        </ul>
+
+        <h2>4. What I receive</h2>
+        <p><span class="m-manual">I receive only what you choose to send me, on <span id="p-channel">Discord</span>.</span><span class="m-send" hidden>I receive what you enter in the form and send. If you also write to me on Discord or by email, I receive that too.</span> That can include your Discord name, your server name, what you want built, your deadline and your budget, and the line showing that you agreed to the terms and when. It is also handled by Discord or your email provider, under their own policies.</p>
+
+        <h2>5. How I use it</h2>
+        <ul>
+          <li>To reply to you, give you a quote and carry out the project.</li>
+          <li>To keep a record of what we agreed, including that you accepted the terms.</li>
+          <li>I do not sell your information or use it for advertising.</li>
+          <li>I use AI tools in my work, so details of your project may be processed by them while I work on it. Do not send me passwords, tokens or other secrets.</li>
+        </ul>
+
+        <h2>6. How long I keep it</h2>
+        <p>I keep what you send for as long as the project lasts, and afterwards for as long as I need a record of the agreement. You can ask me to delete it, and I will, unless I need to keep something for a legal or accounting reason.</p>
+
+        <h2>7. Age</h2>
+        <p>This website and my services are for people aged 18 or over, and the form asks you to confirm it. They are not meant for children.</p>
+
+        <h2>8. Your choices</h2>
+        <ul>
+          <li>Delete the requests saved in your browser, as described in section 2.</li>
+          <li>Ask me to show you or delete what you sent me.</li>
+        </ul>
+
+        <h2>9. Changes and contact</h2>
+        <p>I may update this policy. The date at the top shows the latest update. Questions:</p>
+        <div class="contact" data-contact></div>
+        <p class="fine">Also see the <a href="#terms" style="color:var(--accent)">Terms and Conditions</a>. This policy is written in plain language and is not legal advice.</p>
+      </section>
+    </div>
   </main>
 
   <footer class="foot">
-    <span>suhxxn plugins</span>
-    <nav aria-label="Footer"><a href="#home">Home</a><a href="#waffle">WaffleSMP</a><a href="#anticheat">Anti-cheat</a><a href="#services">Services</a><a href="#request">Request</a></nav>
+    <span>suhxxn plugins<span class="muted" data-contact="inline" style="display:block"></span></span>
+    <nav aria-label="Footer"><a href="#home">Home</a><a href="#waffle">WaffleSMP</a><a href="#services">Services</a><a href="#request">Request</a><a href="#terms">Terms</a><a href="#privacy">Privacy</a></nav>
     <span>Minecraft is a trademark of Mojang. Not affiliated with Mojang or Microsoft.</span>
   </footer>
 </div>
@@ -497,164 +584,18 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
   "use strict";
   /* Edit these two lines: your Discord name, and an optional link to an outside request form (leave empty to hide it). */
   var DISCORD = "orchinplayz";
+  var EMAIL = "";        /* your contact email, for example "you@example.com". Leave empty to hide it. */
   var FORM_URL = "";
-  var VERSION = "v0.15";
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbydF43KiywsOwDul30t5lQbvA8Z3Cu_6z8bfnYFc3vqF7V3HNKskYjGggR4_i_Vun8gYw/exec";     /* the /exec link of your request relay (Google Apps Script). Empty = the form only makes a message to copy. */
+  var SAMPLE_URL = "";   /* link to the public sample plugin repo, for example "https://github.com/suhxxnplugins/quickwarps". Empty hides the card. */
+  var PRICES = { simple: "$30", economy: "$80", complex: "$250", minimum: "$25" };   /* for example "$150". Empty shows "Quoted by scope". */
+  var TERMS_VERSION = "2026-11-22";   /* change this to the new date whenever you change the Terms or Privacy pages */
 
   var reduce = false;
   try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
 
-  /* ---------- detection data (alert lines are real lines from my own test logs) ---------- */
-  var GROUPS = [
-    { name: "Movement", items: [
-      ["Speed", 1, "Moving faster than a player can on foot."],
-      ["Fly", 1, "Staying in the air with nothing under the player."],
-      ["Glide", 1, "Falling much too slowly."],
-      ["Jetpack", 1, "Rising again and again without touching the ground."],
-      ["HighJump", 1, "Rising further in a jump than the game allows.", { t: "19:09:43", n: 1, text: "rose 22.36 blocks in one tick (limit 0.66)", ms: 15 }],
-      ["Step", 1, "Climbing blocks that need a jump, without jumping."],
-      ["Jesus", 1, "Walking on water."],
-      ["Spider", 1, "Climbing walls."],
-      ["FastLadder", 1, "Climbing a ladder much faster than 0.12 blocks per tick.", { t: "19:11:15", n: 1, text: "rising at a constant 0.29 blocks/tick in the air (ladders give about 0.12)", ms: 7 }],
-      ["Phase", 1, "Moving straight through solid blocks.", { t: "19:09:43", n: 1, text: "moved 22.4 blocks in one step straight through solid blocks (1.8 blocks of wall)", ms: 15 }],
-      ["NoWeb", 1, "Walking at normal speed inside a cobweb.", { t: "15:17:47", n: 1, text: "moved 0.21 blocks per tick inside a cobweb (limit 0.17)", ms: 50 }],
-      ["NoSlowdown", 1, "Moving at full speed while eating or drawing a bow."],
-      ["InvWalk", 1, "Walking at full speed with an inventory screen open."],
-      ["NoFall", 1, "Claiming to be on the ground in the middle of a fall."],
-      ["AntiHunger", 1, "Always claiming to be in the air, even on a solid floor.", { t: "19:10:12", n: 1, text: "says it is in the air for 7 packets while standing on a solid floor (AntiHunger)", ms: 349 }],
-      ["Sneak", 0, "Moving at walking speed while the server thinks the player is sneaking."],
-      ["LiquidSpeed", 0, "Swimming faster than any real setup allows."],
-      ["InvalidSprint", 0, "Sprinting when hungry or blind, which the game does not allow."],
-      ["Elytra", 0, "Gliding faster than any real glide, or hovering while gliding."],
-      ["Vehicle", 0, "Boats, minecarts and horses moving or rising too fast."]
-    ] },
-    { name: "Combat", items: [
-      ["KillAura", 1, "Hitting two different targets in the same tick."],
-      ["Reach", 1, "Hitting from further away than the game allows.", { t: "14:39:42", n: 1, text: "reach 3.96 blocks (limit 3.0)", ms: 166 }],
-      ["Hitbox", 1, "Hitting a target the player is not looking at.", { t: "15:14:35", n: 1, text: "hitbox: not looking at the target [offset 1.73, dist 1.08]", ms: 22 }],
-      ["AutoClicker", 1, "Clicking with machine-perfect timing.", { t: "14:39:53", n: 1, text: "too consistent (sd 0.2ms, mean 300ms)", ms: 141 }],
-      ["Criticals", 1, "Sending fake position packets to land critical hits.", { t: "19:07:50", n: 1, text: "2 movement packets in the same tick as an attack (criticals, packet mode)", ms: 12 }],
-      ["MaceDMG", 1, "A huge out-and-back jump in one tick to boost mace damage."],
-      ["AntiKnockback", 1, "Not moving when the server pushes the player."],
-      ["SilentAim", 1, "Aiming at a target for one packet, then snapping back.", { t: "14:39:42", n: 1, text: "aim jumped 27 degrees for one packet and returned to the exact same spot (silent rotation)", ms: 166 }],
-      ["WallHit", 1, "Hitting a target through a solid wall.", { t: "14:39:42", n: 1, text: "hit a target with solid blocks in the way (about 1.2 blocks of wall on the clearest line)", ms: 202 }],
-      ["Spinbot", 1, "Whirling the view round every tick.", { t: "15:23:26", n: 1, text: "turned the view 45+ degrees in 8 of the last 10 ticks (spinbot / derp)", ms: 438 }],
-      ["AimAssist", 0, "Turning the view at a perfectly steady speed. A first version missed Wurst's AimAssist."]
-    ] },
-    { name: "World", items: [
-      ["Nuker", 1, "Starting to break several blocks in one tick.", { t: "16:00:44", n: 1, text: "3 different blocks started breaking in one tick" }],
-      ["FastPlace", 1, "Placing blocks faster than a hand can click."],
-      ["Scaffold", 1, "Building under yourself with aim that is too good. Caught through SilentAim and Timer."],
-      ["FastBreak", 1, "Breaking a block much faster than the tool allows.", { t: "15:16:37", n: 1, text: "broke a block in 2231 ms (this block takes about 9400 ms with this tool)", ms: 234 }],
-      ["OreRate", 0, "Finding far more separate diamond veins than normal. A staff review flag for Xray."]
-    ] },
-    { name: "Packets and timing", items: [
-      ["Timer", 1, "Sending movement packets faster than 20 a second.", { t: "19:07:47", n: 1, text: "packets faster than 20/s", ms: 8 }],
-      ["Blink", 1, "Holding packets back and sending them all at once.", { t: "19:12:17", n: 1, text: "5 movement packets arrived with no game tick between them (blink release)", ms: 490 }],
-      ["Rubberband", 1, "Ignoring the server pulling the player back."],
-      ["PacketFlood", 0, "Sending hundreds of packets in a second."],
-      ["ActionSpam", 0, "Toggling sneak or sprint every tick."],
-      ["InvSpeed", 0, "Clicking inventory slots at a bot's speed or rhythm."],
-      ["FastEat / FastBow", 0, "Finishing a meal or drawing a bow far too quickly."]
-    ] }
-  ];
-
-  var total = 0, tested = 0, lines = [];
-  GROUPS.forEach(function (g) { g.items.forEach(function (it) { total++; if (it[1]) tested++; if (it[3]) lines.push({ name: it[0], d: it[3] }); }); });
-
-  function logLine(name, d) {
-    var el = document.createElement("div");
-    el.className = "log-line";
-    function span(cls, txt) { var s = document.createElement("span"); if (cls) s.className = cls; s.textContent = txt; return s; }
-    el.appendChild(span("t", "[" + d.t + "] "));
-    el.appendChild(document.createTextNode("AC » "));
-    el.appendChild(span("c", "suhxxn"));
-    el.appendChild(document.createTextNode(" failed "));
-    el.appendChild(span("n", name));
-    el.appendChild(document.createTextNode(" [" + d.n + "] " + d.text));
-    if (d.ms) el.appendChild(span("ms", " (" + d.ms + "ms)"));
-    return el;
-  }
-
-  /* ---------- hero log: shows real alerts, then keeps streaming them ---------- */
-  var heroLog = document.getElementById("hero-log");
-  var order = [4, 8, 12, 0, 13, 7, 10, 3, 5, 9, 1, 2, 6, 11, 14];
-  var shown = 0;
-  function nextLine() { var e = lines[order[shown % order.length] % lines.length]; shown++; return logLine(e.name, e.d); }
-  if (heroLog) {
-    for (var i = 0; i < 6; i++) heroLog.appendChild(nextLine());
-    var cur = document.createElement("div"); cur.className = "log-line"; cur.innerHTML = '<span class="t">&gt;</span><span class="caret"></span>'; cur.id = "caret-line";
-    heroLog.appendChild(cur);
-    if (!reduce) {
-      setInterval(function () {
-        if (document.hidden || document.getElementById("v-home").hidden) return;
-        var c = document.getElementById("caret-line");
-        heroLog.insertBefore(nextLine(), c);
-        while (heroLog.children.length > 8) heroLog.removeChild(heroLog.firstChild);
-      }, 1900);
-    }
-  }
-
-  /* ---------- explorer ---------- */
-  var groupsEl = document.getElementById("groups");
-  var detail = document.getElementById("detail");
-  var selected = null;
-  function showDetail(it, btn) {
-    if (selected) selected.setAttribute("aria-pressed", "false");
-    btn.setAttribute("aria-pressed", "true");
-    selected = btn;
-    detail.textContent = "";
-    var n = document.createElement("span"); n.className = "name"; n.textContent = it[0];
-    var w = document.createElement("span"); w.className = "what"; w.textContent = it[2];
-    detail.appendChild(n); detail.appendChild(w);
-    if (it[3]) {
-      var l = logLine(it[0], it[3]); l.className = "log-line raw"; l.style.whiteSpace = "normal";
-      detail.appendChild(l);
-      var s = document.createElement("span"); s.className = "state"; s.textContent = "Real alert from my test log."; detail.appendChild(s);
-    } else {
-      var s2 = document.createElement("span"); s2.className = "state";
-      s2.textContent = it[1] ? "Caught in my test runs. I did not keep the exact alert text for this one." : "Written and unit-tested. Not tried against a real hack yet.";
-      detail.appendChild(s2);
-    }
-  }
-  if (groupsEl) {
-    var first = null;
-    GROUPS.forEach(function (g) {
-      var wrap = document.createElement("div"); wrap.className = "grp";
-      var h = document.createElement("h4"); h.textContent = g.name; wrap.appendChild(h);
-      var ul = document.createElement("ul"); ul.className = "chips";
-      g.items.forEach(function (it) {
-        var li = document.createElement("li");
-        var b = document.createElement("button"); b.type = "button"; b.className = "chip" + (it[1] ? "" : " untested"); b.textContent = it[0]; b.setAttribute("aria-pressed", "false");
-        b.addEventListener("click", function () { showDetail(it, b); });
-        li.appendChild(b); ul.appendChild(li);
-        if (it[0] === "Phase") first = { it: it, b: b };
-      });
-      wrap.appendChild(ul); groupsEl.appendChild(wrap);
-    });
-    if (first) showDetail(first.it, first.b);
-  }
-
-  /* ---------- counters ---------- */
-  function countUp(el, to) {
-    if (!el) return;
-    if (reduce) { el.textContent = to; return; }
-    el.textContent = "0";
-    var start = null, dur = 1100;
-    function step(ts) {
-      if (start === null) start = ts;
-      var p = Math.min(1, (ts - start) / dur), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(to * e);
-      if (p < 1) requestAnimationFrame(step); else el.textContent = to;
-    }
-    requestAnimationFrame(step);
-  }
-  var statTotal = document.getElementById("stat-total"), statTested = document.getElementById("stat-tested");
-  if (statTotal) statTotal.textContent = total;
-  if (statTested) statTested.textContent = tested;
-  var verEl = document.getElementById("ver"); if (verEl) verEl.textContent = VERSION + ", in development";
-
   /* ---------- router ---------- */
-  var VIEWS = ["home", "waffle", "anticheat", "services", "request"];
+  var VIEWS = ["home", "waffle", "services", "request", "terms", "privacy"];
   var current = "";
   function route() {
     var h = (location.hash || "").replace("#", "");
@@ -670,7 +611,6 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
       if (links[i].getAttribute("data-view") === h) links[i].setAttribute("aria-current", "page"); else links[i].removeAttribute("aria-current");
     }
     try { window.scrollTo(0, 0); } catch (e) {}
-    if (h === "home") { countUp(statTotal, total); countUp(statTested, tested); }
   }
   window.addEventListener("hashchange", route);
   route();
@@ -703,6 +643,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
     if (r.must) { out.push(""); out.push("Must-have:"); r.must.split("\n").forEach(function (l) { if (l.trim()) out.push("- " + l.trim()); }); }
     out.push("");
     out.push("Needed: " + r.deadline + (r.budget ? "  |  Budget: " + r.budget : "") + "  |  Source code: " + (r.src ? "yes" : "no"));
+    if (r.agreed) { out.push(""); out.push("Agreed to the Terms and Privacy Policy (version " + r.terms + ") on " + r.agreed + ", and confirmed being 18 or over."); }
     return out.join("\n");
   }
   function copyText(text, btn) {
@@ -715,21 +656,28 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
       navigator.clipboard.writeText(text).then(function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = btn.getAttribute("data-label"); }, 1800); }, fallback);
     } catch (e) { fallback(); }
   }
-  function showReceipt(r) {
+  function showReceipt(r, state) {
     var box = document.getElementById("receipt");
     box.textContent = "";
     box.hidden = false;
     document.getElementById("howto").hidden = true;
-    var p = document.createElement("p"); p.className = "muted"; p.style.margin = "0 0 4px"; p.textContent = "Your request ID";
+    var p = document.createElement("p"); p.className = "muted"; p.style.margin = "0 0 4px";
+    p.textContent = state === "sent" ? "Request sent. Your request ID" : "Your request ID";
     var id = document.createElement("div"); id.className = "rid"; id.textContent = r.id;
-    var tip = document.createElement("p"); tip.style.margin = "10px 0 0"; tip.textContent = "Copy the message below and send it to me on Discord (" + DISCORD + "). Nothing has been sent yet.";
+    var tip = document.createElement("p"); tip.style.margin = "10px 0 0";
+    if (state === "sent") tip.textContent = "I got it. I will reply to " + r.contact + " on Discord. Keep the ID in case you need to mention it.";
+    else if (state === "failed") tip.textContent = "I could not confirm that this was sent. Copy the message below and send it to me on Discord (" + DISCORD + ")" + (EMAIL ? " or by email (" + EMAIL + ")" : "") + " so it is not lost.";
+    else tip.textContent = "Copy the message below and send it to me on Discord (" + DISCORD + ")" + (EMAIL ? " or by email (" + EMAIL + ")" : "") + ". Nothing has been sent yet.";
     var pre = document.createElement("pre"); pre.textContent = buildText(r);
     var row = document.createElement("div"); row.className = "actions";
-    var cp = document.createElement("button"); cp.type = "button"; cp.className = "btn primary"; cp.textContent = "Copy message"; cp.setAttribute("data-label", "Copy message");
-    cp.addEventListener("click", function () { copyText(buildText(r), cp); });
+    if (state !== "sent") {
+      var cp = document.createElement("button"); cp.type = "button"; cp.className = "btn primary"; cp.textContent = "Copy message"; cp.setAttribute("data-label", "Copy message");
+      cp.addEventListener("click", function () { copyText(buildText(r), cp); });
+      row.appendChild(cp);
+    }
     var nw = document.createElement("button"); nw.type = "button"; nw.className = "btn"; nw.textContent = "New request";
     nw.addEventListener("click", function () { box.hidden = true; document.getElementById("howto").hidden = false; document.getElementById("f-title").focus(); });
-    row.appendChild(cp); row.appendChild(nw);
+    row.appendChild(nw);
     box.appendChild(p); box.appendChild(id); box.appendChild(tip); box.appendChild(pre); box.appendChild(row);
     try { box.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" }); } catch (e) {}
   }
@@ -759,23 +707,77 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     var ok = true;
-    setErr("e-contact", ""); setErr("e-title", ""); setErr("e-desc", "");
+    setErr("e-contact", ""); setErr("e-title", ""); setErr("e-desc", ""); setErr("e-agree", "");
     if (!val("f-contact")) { setErr("e-contact", "Add your Discord name so I can reply."); ok = false; }
     if (!val("f-title")) { setErr("e-title", "Give the plugin a short title."); ok = false; }
     if (val("f-desc").length < 20) { setErr("e-desc", "Describe what it should do in a sentence or two."); ok = false; }
+    if (!document.getElementById("f-agree").checked) { setErr("e-agree", "Please confirm you are 18 or over and agree to the Terms and the Privacy Policy to continue."); ok = false; }
     if (!ok) return;
     var d = new Date();
     var r = {
       id: makeId(), date: d.toISOString().slice(0, 10),
       contact: val("f-contact"), server: val("f-server"), type: val("f-type"), version: val("f-version"),
       title: val("f-title"), desc: val("f-desc"), must: val("f-must"), deadline: val("f-deadline"), budget: val("f-budget"),
-      src: document.getElementById("f-src").checked
+      src: document.getElementById("f-src").checked,
+      agreed: d.toISOString().slice(0, 10), terms: TERMS_VERSION
     };
-    memory.push(r); if (memory.length > 20) memory.shift(); save(memory);
-    renderSaved();
-    showReceipt(r);
-    form.reset();
+    var website = val("f-website");
+    function finish(state) {
+      memory.push(r); if (memory.length > 20) memory.shift(); save(memory);
+      renderSaved();
+      showReceipt(r, state);
+      form.reset();
+    }
+    if (!ENDPOINT) { finish("manual"); return; }
+    var btn = document.getElementById("f-submit");
+    btn.disabled = true; btn.textContent = "Sending...";
+    var payload = JSON.stringify({ id: r.id, contact: r.contact, server: r.server, type: r.type, version: r.version, title: r.title, desc: r.desc, must: r.must, deadline: r.deadline, budget: r.budget, src: r.src, agreed: r.agreed, terms: r.terms, website: website });
+    var ctl = ("AbortController" in window) ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 20000);
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: payload, signal: ctl ? ctl.signal : undefined })
+      .then(function (res) { return res.json(); })
+      .then(function (j) { finish(j && j.ok ? "sent" : "failed"); })
+      .catch(function () { finish("failed"); })
+      .then(function () { clearTimeout(timer); btn.disabled = false; btn.textContent = "Send my request"; });
   });
+
+  /* ---------- send mode or copy mode ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll(".m-send"), function (el) { el.hidden = !ENDPOINT; });
+  Array.prototype.forEach.call(document.querySelectorAll(".m-manual"), function (el) { el.hidden = !!ENDPOINT; });
+  var submitBtn = document.getElementById("f-submit"); if (submitBtn && ENDPOINT) submitBtn.textContent = "Send my request";
+
+  /* ---------- contact, prices, proof of work ---------- */
+  function mailLink(text) {
+    var a = document.createElement("a");
+    a.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Plugin request");
+    a.textContent = text;
+    return a;
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-contact]"), function (box) {
+    box.textContent = "";
+    if (box.getAttribute("data-contact") === "inline") {
+      box.appendChild(document.createTextNode("Discord: " + DISCORD + (EMAIL ? " \u00b7 Email: " : "")));
+      if (EMAIL) box.appendChild(mailLink(EMAIL));
+      return;
+    }
+    function row(label, node) { var r = document.createElement("div"), b = document.createElement("b"); b.textContent = label; r.appendChild(b); r.appendChild(node); box.appendChild(r); }
+    row("Discord", document.createTextNode(DISCORD));
+    if (EMAIL) row("Email", mailLink(EMAIL));
+  });
+  if (EMAIL) {
+    var alt = document.getElementById("email-alt");
+    if (alt) { alt.appendChild(document.createTextNode(", or by email: ")); alt.appendChild(mailLink(EMAIL)); }
+    var pc = document.getElementById("p-channel"); if (pc) pc.textContent = "on Discord or by email";
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-price]"), function (el) {
+    var k = el.getAttribute("data-price"), v = (PRICES[k] || "").trim();
+    if (!v) return;
+    el.textContent = k === "minimum" ? v : "From " + v;
+  });
+  if (SAMPLE_URL) {
+    var sc = document.getElementById("sample-card"), sl = document.getElementById("sample-link");
+    if (sc && sl) { sl.href = SAMPLE_URL; sc.hidden = false; var se = document.getElementById("sample-empty"); if (se) se.hidden = true; }
+  }
 })();
 </script>
 
